@@ -7,4 +7,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # Homepage Path
     path('',include('stockQuotes.urls')),
+    path('',include('StockNews.urls')),
 ]
