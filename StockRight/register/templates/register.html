@@ -1,0 +1,12 @@
+{% extends 'C:\Users\Akshar\Desktop\Y4S2\CMPT350\project\stocks\StockRight\stockQuotes\templates\base.html' %}
+
+{% block title %} Create Account {% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <form method="POST" class="form-group" action="">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-success">Register</button>
+    </form>
+{% endblock %}
