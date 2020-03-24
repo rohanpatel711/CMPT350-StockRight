@@ -21,9 +21,13 @@ def home(request):
             api = "Error"
         return render(request, 'home.html', {'api':api})
     else:
-        return render(request, 'home.html', {'ticker':'Enter Ticker above.'})
+        return render(request, 'home.html', {'ticker':'Enter Ticker Symbol above.'})
 
 
 # About Me page view function
 def about(request):
     return render(request, 'about.html', {})
+
+
+def myStocks(request):
+    return render(request, 'myStocks.html', {})
