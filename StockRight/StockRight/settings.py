@@ -40,8 +40,6 @@ INSTALLED_APPS = [
     'crispy_forms',
     # First stock ticker app
     'stockQuotes',
-    # Register app
-    'register'
 ]
 
 MIDDLEWARE = [
