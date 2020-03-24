@@ -4,6 +4,14 @@ StockRight is a website that provides live prices, historical data, news article
 
 It allows users to create an account which allows them to add stocks to thier watchlist and view additional information about the stock.
 
+# Technologies Used
+
+    HTML
+    CSS
+    JavaScript
+    JQuery
+    Python
+    Django
 
 # Requirements
 
