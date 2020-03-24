@@ -1,3 +1,27 @@
 {% extends 'base.html' %} {% block content %}
-<h1>Hello World!</h1>
+<br/> 
+
+{% if ticker %}
+    {{ ticker }}
+{% endif %}
+
+{% if api %} 
+    {% if api == "Error" %} 
+        Invalid Ticker Symbol. Try again 
+    {% else %}
+        <h1>{{ api.companyName }}</h1>
+        <h2>Price: ${{ api.latestPrice }}</h2> 
+        Previous Close: ${{ api.previousClose }}<br/>
+        Market Cap: {{ api.marketCap }}<br/>
+        PE Ratio: {{ api.peRatio }}<br/>
+        52W High: {{ api.week52High }}<br/>
+        52W Low: {{ api.week52Low }}<br/>
+        YTD Change(%): {{ api.ytdChange }}<br/>
+    {% endif %} 
+{% endif %} 
+
+
 {% endblock %}
+
+
+<!-- {% for key,value in api.items %} {{key}}: {{value}} <br/> {%endfor%} -->
