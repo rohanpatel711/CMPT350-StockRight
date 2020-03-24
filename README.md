@@ -8,6 +8,7 @@ It allows users to create an account which allows them to add stocks to thier wa
 # Requirements
 
     Python 2.7 or Python 3.3+
+    Django
 
 # API's 
     
