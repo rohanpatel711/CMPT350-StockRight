@@ -10,5 +10,6 @@ urlpatterns = [
     path('about.html',views.about,name='about'),
     # My Portfolio page
     path('myStocks.html',views.myStocks, name='myStocks'),
+     path('index.html', views.index, name="index"),
 
 ]

@@ -11,5 +11,4 @@ def news(request):
         data = json.loads(api_req._content)
     except Exception as e:
         api = "Error"
-
     return render(request, 'news.html', {'api': data})

@@ -31,3 +31,15 @@ def about(request):
 
 def myStocks(request):
     return render(request, 'myStocks.html', {})
+
+
+def index(request):
+    import requests
+    import json
+    url = "https://stocknewsapi.com/api/v1/category?section=alltickers&items=50&token=ubtrdde1nxakqqfeasdp1urmiz7xgxi4a1aqo25n"
+    api_req = requests.get(url)
+    try:
+        data = json.loads(api_req._content)
+    except Exception as e:
+        api = "Error"
+    return render(request, 'index.html', {'api': data})
