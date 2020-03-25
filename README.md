@@ -51,7 +51,7 @@ It allows users to create an account which allows them to add stocks to thier wa
 # Features of the Web-App: 
 - Profile creation
 - Browsing Trending News 
-- Detials of a Stock
+- Details of a Stock
 - Querying the current price of some share
 - Tabular representation of current shares
 - Viewing the most trending shares on that particular day
