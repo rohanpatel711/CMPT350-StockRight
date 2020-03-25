@@ -18,6 +18,22 @@ It allows users to create an account which allows them to add stocks to thier wa
     Python 2.7 or Python 3.3+
     Django
 
+####      Packages Required:
+
+    virtualenv
+    flask
+    requests
+    bs4
+    django
+    post
+    pandas
+    json
+    ajax
+    dj-database-url
+    django-jquery
+    django-staticfiles
+    get
+    
 # API's 
     
      IEX Cloud
