@@ -48,4 +48,26 @@ It allows users to create an account which allows them to add stocks to thier wa
      5. $ python manage.py runserver
      6. Open a browser(Chrome, Firefox, Safari, Edge) and type http://localhost:8000 in the address bar
 
+# Features of the Web-App: 
+- Profile creation
+- Browsing Trending News 
+- Detials of a Stock
+- Querying the current price of some share
+- Tabular representation of current shares
+- Viewing the most trending shares on that particular day
 
+
+## Contributing
+
+Feel free to fork this repository and enhance whatever you want, just show the world how you code, think and do magic with your keyboard.
+
+    1. Fork it 
+    2. Create your feature branch (`git checkout -b feature/xxxxx`)
+    3. Commit your changes (`git commit -am 'Add some xxxxx'`)
+    4. Push to the branch (`git push origin feature/xxxxx`)
+    5. Create a new Pull Request
+
+## Credits
+
+[Rohan Patel](https://github.com/rohanpatel711) - rohanspatel711711@gmail.com / rsp502@usask.ca  
+[Akshar Gajjar](https://github.com/aksharg) - akshargajjar.bk@gmail.com / ang399@usask.ca
