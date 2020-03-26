@@ -1,136 +1,110 @@
 <html>
-	<head>
-		{% load static %}
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all" />
-		<link href="{% static 'css/style1.css' %}" rel="stylesheet" type="text/css" media="all" />
+<head>
+	{% load static %}
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-		<script src="{% static 'js/jquery.marquee.min.js' %}"></script>
-		<link href="{% static 'css/popuo-box.css' %}" rel="stylesheet" type="text/css" media="all" />
+	<link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all" />
+	<link href="{% static 'css/style1.css' %}" rel="stylesheet" type="text/css" media="all" />
 
-		<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" />
-		<link rel="stylesheet" href="{% static 'css/flexslider.css' %}" type="text/css" media="screen" property="" />
-	</head>
-	<body>
-		<div class="banner-bottom">
-			<script type="text/javascript">
-				$(function () {
-					$(".demo2").bootstrapNews({
-						newsPerPage: 4,
-						autoplay: true,
-						pauseOnHover: true,
-						navigation: false,
-						direction: 'up',
-						newsTickerInterval: 2500,
-						onToDo: function () {
-							//console.log(this);
-						}
-					});
-				});
-			</script>
-			<script src="{% static 'js/jquery.bootstrap.newsbox.min.js' %}"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script src="{% static 'js/jquery.marquee.min.js' %}"></script>
+</head>
+<body>
 
-			<div class='agileinfo_marquee' style="height: 40px; background-color: black;">
-				<div data-speed="10" class="marquee" style="margin-top: 8px">
-					<ul>
-						{% for idx in api.data %}
-						<li><a href= {{idx.news_url}} style="font-size: 15px; color: #ccc;">{{idx.title}}<span style="font-size: 15px"> | </span></a></li>
-						{% endfor %}
-					</ul>
-				</div>
-			</div>
-		</div>
-		<!-- //banner-bottom -->
-		<!-- banner -->
-		<div class="banner">
-			<section class="slider">
-				<div class="flexslider">
-					<ul class="slides">
-						<li>
-							<div class="w3_agile_banner_text banner1">
-								<h3>trade over world's leading stock exchanges with stockRight</h3>
-								<div class="more">
-									<a href="single.html" class="button button--isi button--text-thick button--text-upper button--size-s"><span>Learn More</span></a>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="w3_agile_banner_text banner5">
-								<h4>grow your money with stockRight</h4>
-							</div>
-						</li>
-					</ul>
-				</div>
-			</section>
-		</div>
-		<script type="text/javascript" src="{% static 'js/jquery.glide.js' %}"></script>
-		<script type="text/javascript">
-			var glide = $('.w3_slider').glide().data('api_glide');
-
-			$(window).on('keyup', function (key) {
-				if (key.keyCode === 13) {
-					glide.jump(3, console.log('Wooo!'));
-				};
-			});
-		</script>
-		<div class="agileits_news_flash" style="margin-top: -400px">
-			<h3><i class="fa fa-bolt" aria-hidden="true"></i>News Flash</h3>
-			<div class="agileits_news_flash_table">
-				<ul class="demo2">
-					{% for idx in api.data %}
-					<li class="news-item1"><strong>{{idx.source_name}}: </strong>{{idx.title}}</li>
-					{% endfor %}
-				</ul>
-				<br>
-			</div>
-		</div>
-		<script src="{% static 'js/easing.js' %}"></script>
-		<script src="{% static 'js/bootstrap.min.js' %}"></script>
-		<script src="{% static 'js/jquery.flexslider.js' %}"></script>
-		<script>
-			$('.marquee').marquee({
-				gap: 150,
-				delayBeforeStart: 0,
-				direction: 'left',
-				duplicated: true,
+<div class="banner-bottom">
+	<script type="text/javascript">
+		$(function () {
+			$(".demo2").bootstrapNews({
+				newsPerPage: 4,
+				autoplay: true,
 				pauseOnHover: true,
-				duration: 15000
+				navigation: false,
+				direction: 'up',
+				newsTickerInterval: 2500,
+				onToDo: function () {
+					//console.log(this);
+				}
 			});
-		</script>
-		<script>
-			$(document).ready(function(){
-				$(".dropdown").hover(
-						function() {
-							$('.dropdown-menu', this).stop( true, true ).slideDown("fast");
-							$(this).toggleClass('open');
-						},
-						function() {
-							$('.dropdown-menu', this).stop( true, true ).slideUp("fast");
-							$(this).toggleClass('open');
-						}
-				);
-			});
-		</script>
-		<script type="text/javascript">
-			jQuery(document).ready(function($) {
-				$(".scroll").click(function(event){
-					event.preventDefault();
-					$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
-				});
-			});
-		</script>
-		<script type="text/javascript">
-			$(window).load(function(){
-				$('.flexslider').flexslider({
-					animation: "slide",
-					start: function(slider){
-						$('body').removeClass('loading');
-					}
-				});
-			});
-		</script>
-		<script src="{% static 'js/easing.min.js' %}"></script>
-	</body>
+		});
+	</script>
+	<script src="{% static 'js/jquery.bootstrap.newsbox.min.js' %}"></script>
+	<div class='agileinfo_marquee' style="height: 40px; background-color: black;">
+		<div data-speed="10" class="marquee" style="margin-top: 8px">
+			<ul>
+				{% for idx in api.data %}
+				<li><a href= {{idx.news_url}} style="font-size: 15px; color: #ccc;">{{idx.title}}<span style="font-size: 15px"> | </span></a></li>
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+</div>
+<section class="slider">
+	<div class="flexslider">
+		<ul class="slides">
+			<li>
+				<div class="w3_agile_banner_text banner1">
+					<h3>trade over world's leading stock exchanges with stockRight</h3>
+					<div class="more">
+						<a href="single.html" class="button button--isi button--text-thick button--text-upper button--size-s"><span>Learn More</span></a>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="w3_agile_banner_text banner5">
+					<h4>grow your money with stockRight</h4>
+				</div>
+			</li>
+		</ul>
+	</div>
+</section>
+
+<link rel="stylesheet" href="{% static 'css/flexslider.css' %}" type="text/css" media="screen" property="" />
+<script src="{% static 'js/jquery.flexslider.js' %}"></script>
+<script type="text/javascript">
+	$(window).load(function(){
+		$('.flexslider').flexslider({
+			animation: "slide",
+			start: function(slider){
+				$('body').removeClass('loading');
+			}
+		});
+	});
+</script>
+	<div class="agileits_news_flash" style="margin-top: -420px">
+		<h3><i class="fa fa-bolt" aria-hidden="true"></i>News Flash</h3>
+		<div class="agileits_news_flash_table">
+			<ul class="demo2" style="list-style: none;">
+				{% for idx in api.data %}
+				<li style="margin-left: 20px; " class="news-item1"><strong>{{idx.source_name}}: </strong>{{idx.title}}</li>
+				{% endfor %}
+			</ul>
+			<br>
+		</div>
+	</div>
+
+	<div class="agileits_news_flash">
+		<h3><i class="fa fa-bolt" aria-hidden="true"></i>Top Mentioned Stocks</h3>
+		<div class="agileits_news_flash_table">
+			<ul class="demo2" style="list-style: none;">
+				{% for idx in api1.data.all %}
+				<li style="margin-left: 20px; " class="news-item1"><strong>{{idx.ticker}}: </strong>{{idx.name}} | Sentiment Score: {{idx.sentiment_score}} |</li>
+				{% endfor %}
+			</ul>
+			<br>
+		</div>
+	</div>
+
+<script>
+	$('.marquee').marquee({
+		gap: 150,
+		delayBeforeStart: 0,
+		direction: 'left',
+		duplicated: true,
+		pauseOnHover: true,
+		duration: 15000
+	});
+</script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+</body>
 </html>
