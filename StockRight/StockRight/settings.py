@@ -37,8 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'crispy_forms',
-    # First stock ticker app
+    'widget_tweaks',
     'stockQuotes',
     'StockNews',
 ]
