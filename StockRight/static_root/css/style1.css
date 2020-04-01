@@ -3,52 +3,39 @@ html, body{
 	font-family: 'Muli', sans-serif;
 	background:#ffffff;
 }
-ul li,ol li{
-	font-size:14px;
-}
+
 p{
 	margin:0;
 	font-size:13px;
 }
+
+
+ul li,ol li{
+	font-size:14px;
+}
+
 h1,h2,h3,h4,h5,h6,a{
 	font-family: 'Muli', sans-serif;
 	margin:0;
 }
+
 ul,label{
 	margin:0;
 	padding:0;
 }
+
 body a:hover{
 	text-decoration:none;
 }
-input[type="submit"],.agileinfo_chat a,.w3l_login_form_bottom1 a,.w3_customer_email_right a,.w3_agile_tags ul li a{
+
+input[type="submit"],.w3_agile_tags ul li a{
 	transition:.5s ease-in;
 	-webkit-transition:.5s ease-in;
 	-moz-transition:.5s ease-in;
 	-o-transition:.5s ease-in;
 	-ms-transition:.5s ease-in;
 }
-/*-- banner --*/
-.banner1{
-	background:url(../images/2.jpg) no-repeat 0px 0px;
-	background-size:cover;
-	-webkit-background-size:cover;
-	-moz-background-size:cover;
-	-o-background-size:cover;
-	-ms-background-size:cover;	
-}
-.banner5{
-	background:url(../images/6.jpg) no-repeat 0px 0px;
-	background-size:cover;
-	-webkit-background-size:cover;
-	-moz-background-size:cover;
-	-o-background-size:cover;
-	-ms-background-size:cover;	
-}
-.banner1,.banner5{
-	min-height:500px;
-	padding:7em 0 0 6em;
-}
+
 .w3_agile_banner_text h3{
 	font-size: 2em;
     color: #212121;
@@ -67,8 +54,7 @@ input[type="submit"],.agileinfo_chat a,.w3l_login_form_bottom1 a,.w3_customer_em
     margin: 9em 0 0;
     font-weight: bold;
 }
-/*-- //banner --*/
-/*-- banner-bottom --*/
+
 .panel ul
 {
     padding:0px;
@@ -76,19 +62,6 @@ input[type="submit"],.agileinfo_chat a,.w3l_login_form_bottom1 a,.w3_customer_em
     list-style:none;
 }
 
-.news-item
-{
-    padding:0;
-    margin:0px;
-}
-.agile_panel {
-    border: none;
-    box-shadow: none;
-	margin: 0;
-}
-.agile_panel_body {
-    padding: 0;
-}
 .caret1{
 	transform:rotate(-180deg);
 	-webkit-transform:rotate(-180deg);
@@ -96,25 +69,15 @@ input[type="submit"],.agileinfo_chat a,.w3l_login_form_bottom1 a,.w3_customer_em
 	-o-transform:rotate(-180deg);
 	-ms-transform:rotate(-180deg);
 }
-table.agileits_w3layouts_table {
-    padding: 10px 30px 0;
-    display: block;
-}
-ul.demo1 {
-    background: #EDEDED;
+
+
+.agile_panel {
+    border: none;
+    box-shadow: none;
+	margin: 0;
 }
 
-.w3l_news_board{
-	padding:0 1em;
-}
-.w3l_news_board h2,.agileinfo_trade_team h5,.w3_single_trade_comments h3,.w3layouts_admin h3,.agile_commodity_videos h3,.w3_equity_market_analysis_chart h3,.w3_equity_market_analysis h3,.w3layouts_site_map_left_grid h3,.agile_ipo_left1 h3,.w3l_commodity_top_news h3,.agileits_commodity_statistics h3,.agileinfo_fund_offers h3,.w3_commodity_prices h3,.w3ls_gauge_chart h3,.agileits_technical_research h3,.w3_agileits_fund_updates h3,.agileits_trending_stocks h3,.w3_agileits_top_losers h3,.w3ls_market_videos h3,.w3l_your_stocks h3,.w3layouts_newsletter h3,.agileinfo_chat h3,.agile_chat h3,.w3layouts_market_movers h3,.wthree_performance h3,.agileinfo_calender h3,.w3layouts_research h3,.agileits_news_flash h3{
-	text-transform: uppercase;
-    font-size: 1em;
-    color: #212121;
-    padding: .5em 1em;
-    background: #EFEFEF;
-    margin-bottom: 1em;
-}
+
 .w3l_news_board h2 i,.agileinfo_trade_team h5 i,.w3_single_trade_comments h3 i,.w3layouts_admin h3 i,.agile_commodity_videos h3 i,.w3_equity_market_analysis_chart h3 i,.w3_equity_market_analysis h3 i,.agile_ipo_left1 h3 i,.w3l_commodity_top_news h3 i,.agileits_commodity_statistics h3 i,.w3_agileits_fund_updates h3 i,.w3_commodity_prices h3 i,.w3ls_gauge_chart h3 i,.agileits_technical_research h3 i,.agileits_trending_stocks h3 i,.w3_agileits_top_losers h3 i,.w3ls_market_videos h3 i,.w3l_your_stocks h3 i,.w3layouts_newsletter h3 i,.agileinfo_chat h3 i,.agile_chat h3 i,.w3layouts_market_movers h3 i,.wthree_performance h3 i,.agileinfo_calender h3 i,.w3layouts_research h3 i,.agileits_news_flash h3 i{
 	padding-right:1em;
 }
@@ -159,7 +122,6 @@ li.news-item1 strong{
 	}
 }
 
-/*-- start-responsive-design --*/
 @media (max-width:1440px){
 	.banner1, .banner2, .banner3, .banner4, .banner5 {
 		min-height: 465px;
@@ -181,6 +143,27 @@ li.news-item1 strong{
 		margin: 7em 0 0;
 	}
 }
+
+
+.news-item
+{
+    padding:0;
+    margin:0px;
+}
+
+.agile_panel_body {
+    padding: 0;
+}
+
+table.agileits_w3layouts_table {
+    padding: 10px 30px 0;
+    display: block;
+}
+
+ul.demo1 {
+    background: #EDEDED;
+}
+
 @media (max-width: 1080px){
 	.navbar-nav > li > a {
 		padding: 15px 16px;
@@ -209,13 +192,6 @@ li.news-item1 strong{
 	.nav-tabs > li > a {
 		padding: 4px 4px;
 	}
-	canvas.flot-overlay,canvas.flot-base,div#chart3,div#chart2 {
-		width: 300px !important;
-		height: 150px !important;
-	}
-	.legend table {
-		font-size: 12px !important;
-	}
 	.w3_agile_banner_text h3 {
 		font-size: 1.8em;
 	}
@@ -225,18 +201,11 @@ li.news-item1 strong{
 	.nav-tabs1 > li > a {
 		padding: 5px 6px !important;
 	}
-	.agile_chat_grid, .w3ls_market_video_grid {
-		width: 31.8%;
-	}
 	.w3l_your_stocks input[type="submit"] {
 		margin: .5em 0 0 4.2em;
 	}
 	.agile_stocks_mutual_fund_grid_r ul li, .agileits_w3layouts_footer_info li {
 		font-size: 13px;
-	}
-	.graph {
-		width: 290px;
-		height: 200px;
 	}
 	.agileits_w3layouts_para {
 		margin: 0;
@@ -375,3 +344,27 @@ li.news-item1 strong{
 		font-size: 1.3em;
 	}
 }
+	
+.banner1{
+	background:url(../images/2.jpg) no-repeat 0px 0px;
+	background-size:cover;
+	-webkit-background-size:cover;
+	-moz-background-size:cover;
+	-o-background-size:cover;
+	-ms-background-size:cover;	
+}
+	
+.banner5{
+	background:url(../images/6.jpg) no-repeat 0px 0px;
+	background-size:cover;
+	-webkit-background-size:cover;
+	-moz-background-size:cover;
+	-o-background-size:cover;
+	-ms-background-size:cover;	
+}
+	
+.banner1,.banner5{
+	min-height:500px;
+	padding:7em 0 0 6em;
+}
+
