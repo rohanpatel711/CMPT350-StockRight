@@ -1,0 +1,105 @@
+{% extends 'base.html' %} {% block content %}
+{% load widget_tweaks %}
+
+<style>
+    #loginCont {
+        align-items: center;
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+    h1 {
+        color: white;
+    }
+    label {
+        color: white;
+    }
+    input.form-control {
+        background-color:#131722; 
+        color:white;
+    }
+    h4 {
+        color: white;
+    }
+    .card {
+        background-color: #1C202B; 
+        width:100%;  
+        max-height: 100%;
+    }
+    p {
+        color: white;
+    }
+    a {
+        color: white;
+        text-decoration: wavy;
+    }
+    input.form-control:focus, textarea {
+        background-color:#131722; 
+        color:white;
+        outline-color: #0c2375;
+    }
+    div.card-body > h4 {
+        text-align: center;
+    }
+    button.btn {
+        background-color:#0c2375; 
+        color: white;
+    }
+</style>
+
+<div class="container" id="loginCont" style="align-content: center;">
+    <div class="d-flex align-items-stretch justify-content-center" style="width: 10%;"></div>
+    <div class="d-flex align-items-stretch justify-content-center">
+        <div class="card text-white border-dark">
+            <div class="card-body">
+                <h4>Login to StockRight</h4>
+                <form method="post" novalidate>
+                    {% csrf_token %}
+    
+                    {% for hidden_field in form.hidden_fields %}
+                        {{ hidden_field }}
+                    {% endfor %}
+    
+                    {% if form.non_field_errors %}
+                        <div class="alert alert-danger" role="alert">
+                        {% for error in form.non_field_errors %}
+                            {{ error }}
+                        {% endfor %}
+                        </div>
+                    {% endif %}
+    
+                    {% for field in form.visible_fields %}
+                        <div class="form-group">
+                            {{ field.label_tag }}
+    
+                            {% if form.is_bound %}
+                                {% if field.errors %}
+                                {% render_field field class="form-control is-invalid" %}
+                                {% for error in field.errors %}
+                                    <div class="invalid-feedback">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                                {% else %}
+                                {% render_field field class="form-control is-valid" %}
+                                {% endif %}
+                            {% else %}
+                                {% render_field field class="form-control" %}
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                    <br/>
+                    <button class="btn btn-lg btn-block" type="submit" name="action">Submit</button>
+                    <!-- <br/> -->
+                    <div class="text-center">
+                        <p>Not a Member? <a href="{% url 'register' %}"><strong>Register Now</strong></a></p>
+                    </div>
+    
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex align-items-stretch justify-content-center" style="width: 10%;"></div>
+
+</div>
+
+{% endblock %}

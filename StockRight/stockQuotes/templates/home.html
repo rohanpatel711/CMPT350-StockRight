@@ -1,40 +1,347 @@
 {% extends 'base.html' %} {% block content %}
-<body>
 
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/font-icons.css' %}">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
 
-<br/> 
-<!-- Form POSTS to the home page -->
-<form action="{% url 'home' %}" class="form-inline my-2 my-lg-0" method="POST">
-    <!-- Security -->
-    {% csrf_token %}
-    <!-- Input Box -->
-    <input class="form-control mr-sm-2" type="search" placeholder="Get Stock Quote" aria-label="Search" name="ticker">
-    <!-- Button -->
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Stock Quote</button>
-</form>
+<style>
+    p {
+        color:white;
+    }
+    h1 {
+        color:white;
+    }
+    h2 {
+        color:white;
+    }
+    h4 {
+        color:white;
+    }
+    a.dropdown-item {
+        color: white;
+    }
+
+    ul.dropdown-menu {
+        background-color: #0c2375;
+        color: white;
+    }
+
+    ul.dropdown-menu > a:hover {
+        background-color: #0c2375;
+        background-image: none;
+    }
+
+    .no-border {
+        border: 0;
+        box-shadow: none;
+    }
+
+    a.card-link:active {
+        color: #0c2375;
+    }
+    a.card-link {
+        color: #007BFF;
+    }
+    #Def {
+        color: #007BFF;
+    }
+    #Def:hover {
+        color: white;
+    }
+</style>
 
 <br/>
-{% if ticker %}
-    {{ ticker }}
-{% endif %}
 
-{% if api %} 
-    {% if api == "Error" %} 
-        Invalid Ticker Symbol. Try again 
-    {% else %}
-        <h1>{{ api.companyName }}</h1>
-        <h2>Price: ${{ api.latestPrice }}</h2> 
-        Previous Close: ${{ api.previousClose }}<br/>
-        Market Cap: {{ api.marketCap }}<br/>
-        PE Ratio: {{ api.peRatio }}<br/>
-        52W High: {{ api.week52High }}<br/>
-        52W Low: {{ api.week52Low }}<br/>
-        YTD Change(%): {{ api.ytdChange }}<br/>
-    {% endif %} 
-{% endif %} 
+<div class="container-fluid">
 
-</body>
+    <!-- Search bar -->
+    <div class="p-2 bd-highlight flex-fill">
+        <form action="{% url 'home' %}" class="form-inline flex-fill" method="POST" style="width:100%;">
+            {% csrf_token %}
+            <div class="input-group mb-3" style="width: 100%;">
+                <div class="input-group-prepend" style="width: 13%;">
+                        <div class="btn-group" style="width: 99%;">
+                            <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" id="options" style="background-color: #0c2375;  color:#FFFFFF;"> <span id="opt">Chose option</span> <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-left">
+                                <li><a class="dropdown-item" id="1" href="#" >Ticker Search</a></li>
+                                <li><a class="dropdown-item" id="2" href="#">Company Search</a></li>
+                            </ul>
+                        </div>
+                        <script type="text/javascript">
+                            $(function(){
+                                $("#opt").text($("#1").text());
+                                $("#tickerS").show();
+                                $("#companyS").hide();
+                            });
+                        </script>
+                        <script>
+                            $(function(){
+                                $("#1").click(function () {
+                                    $("#opt").text($(this).text());
+                                    $("#tickerS").show();
+                                    $("#companyS").hide();
+                                });
+                                $("#2").click(function () {
+                                    $("#opt").text($(this).text());
+                                    $("#tickerS").hide();
+                                    $("#companyS").show();
+                                });
+                            });
+                        </script>
+                </div>
+                <div class="input-group-append" style="width: 87%;">
+                    <input type="text" type="hidden" class="form-control no-border" placeholder="AAPL" aria-label="Text input with dropdown button" name="ticker" id="tickerS" style="width:90%; background-color:#131722; color:white;">
+                    <input type="text" type="hidden" class="form-control no-border" placeholder="apple" aria-label="Text input with dropdown button" name="company" id="companyS" style="width:90%; background-color:#131722; color:white;">
+                    <button class="btn" type="submit" style="width:10%; background-color: #0c2375; color:#FFFFFF;">Search</button>
+                </div>
+            </div>
+        </form>
+        <script type="text/javascript">
+            function forceKeyPressUppercase(e)
+            {
+                var charInput = e.keyCode;
+                if((charInput >= 97) && (charInput <= 122)) { // lowercase
+                    if(!e.ctrlKey && !e.metaKey && !e.altKey) { // no modifier key
+                        var newChar = charInput - 32;
+                        var start = e.target.selectionStart;
+                        var end = e.target.selectionEnd;
+                        e.target.value = e.target.value.substring(0, start) + String.fromCharCode(newChar) + e.target.value.substring(end);
+                        e.target.setSelectionRange(start+1, start+1);
+                        e.preventDefault();
+                    }
+                }
+            }
+            document.getElementById("tickerS").addEventListener("keypress", forceKeyPressUppercase, false);
+        </script>
+    </div>
+
+    <!-- Search Results -->
+    <div class="p-2 bd-highlight flex-fill">
+        {% if api %} 
+            {% if api == "Invalid Ticker" %} 
+            {% elif api == "Invalid Company name." %}
+            {% else %}
+                <div class="card text-white" style="background-color: #0C0E15; max-width: 100%; max-height: 100%;  border-color: #0c2375;">
+                    <div class="card-header" style="background-color: #121620; border-color: #0c2375;">
+                        <img src="{{api.customLogo}}" alt="{{api.companyName}} Logo" style="width:30px;height:30px;" data-toggle="collapse" href="#collapseStocks">
+                        <a class="card-link" data-toggle="collapse" href="#collapseCompany">&nbsp;&nbsp;<strong>{{ api.companyName }}</strong></a>
+                    </div>
+                    <div class="collapse show" id="collapseCompany" data-parent="#accordion">
+                        <div class="card-body">
+                            <div class="d-flex flex-row bd-highlight mb-4 flex-fill flex-wrap">
+                                <div class="p-2 bd-highlight flex-fill" style="width:30%">
+                                    <div class="card text-white border-dark" style="background-color: #1C202B; width:100%; max-height: 100%;">
+                                        <div class="card-header border-dark">Fundamentals</div>
+                                        <div class="card-body">
+                                            <h1>{{api.companyName}}</h1>
+                                            <h2>Price:&nbsp;&nbsp;${{api.latestPrice}}</h2> 
+                                            <h4><a id="Def" href="https://www.investopedia.com/terms/p/previousclose.asp" target="_blank">Previous Close:</a>&nbsp;&nbsp;${{api.previousClose}}</p>
+                                            <h4><a id="Def" href="https://www.investopedia.com/terms/m/marketcapitalization.asp" target="_blank">Market Cap:</a>&nbsp;&nbsp;{{api.marketCap}}</p>
+                                            <h4><a id="Def" href="https://www.investopedia.com/terms/p/price-earningsratio.asp" target="_blank">P/E Ratio:</a>&nbsp;&nbsp;{{api.peRatio}}</p>
+                                            <h4><a id="Def" href="https://www.investopedia.com/terms/1/52weekhighlow.asp" target="_blank">52W High:</a>&nbsp;&nbsp;${{api.week52High}}</p>
+                                            <h4><a id="Def" href="https://www.investopedia.com/terms/1/52weekhighlow.asp" target="_blank">52W Low:</a>&nbsp;&nbsp;${{api.week52Low}}</p>
+                                            <h4><a id="Def" href="https://www.investopedia.com/terms/y/ytd.asp" target="_blank">YTD Change:</a>&nbsp;&nbsp;{{api.ytdChange}}%</h4>
+                                            <h4><a id="Def" href="https://www.investopedia.com/terms/a/averagedailytradingvolume.asp" target="_blank">Avg. Total Volume:</a>&nbsp;&nbsp;{{api.avgTotalVolume}}</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="p-2 bd-highlight flex-fill" style="width:30%">
+                                    <!-- <h6>Currencies</h6> -->
+                                    <div class="card text-white border-dark" style="background-color: #1C202B; width:100%;  max-height:100%;">
+                                        <div class="card-header border-dark">Company Description</div>
+                                        <div class="card-body">
+                                            <h1>CEO:&nbsp;<a id="Def" href="https://en.wikipedia.org/{{cInfo.customCEO}}" target="_blank">{{cInfo.CEO}}</a></h1>
+                                            <h2>Industry:&nbsp;{{cInfo.industry}}</h2>
+                                            <h4>Sector: {{cInfo.sector}}</h4>
+                                            <h4>Exchange: {{cInfo.exchange}}</h4>
+                                            <h4>Primary SIC Code: {{cInfo.primarySicCode}}</h4>
+                                            <h4>No. of Employees: {{cInfo.employees}}</h4>
+                                            <h4>Website: {{cInfo.website}}</h4>
+                                            <h4>Location: {{cInfo.city}}, {{cInfo.state}}, {{cInfo.country}}</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="p-2 bd-highlight flex-fill" style="width:40%">
+                                    <!-- <h6>Currencies</h6> -->
+                                    <div class="card text-white border-dark" style="background-color: #1C202B; width:100%; height:100%; padding:0%;">
+                                        <!-- <div class="card-header border-dark">Company Details</div> -->
+                                        <div class="card-body" style="padding:0%;">
+                                            <!-- TradingView Widget BEGIN -->
+                                            <div class="tradingview-widget-container">
+                                                <div class="tradingview-widget-container__widget"></div>
+                                                <!-- <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/NASDAQ-AAPL/" rel="noopener" target="_blank"><span class="blue-text">AAPL Fundamental Data</span></a> by TradingView</div> -->
+                                                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-financials.js" async>
+                                                {
+                                                "symbol": "{{api.symbol}}",
+                                                "colorTheme": "dark",
+                                                "isTransparent": false,
+                                                "largeChartUrl": "",
+                                                "displayMode": "regular",
+                                                "width": "100%",
+                                                "height": "100%",
+                                                "locale": "en"
+                                            }
+                                                </script>
+                                            </div>
+                                            <!-- TradingView Widget END -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="p-2 bd-highlight flex-fill" style="width:33.33%">
+                                    <!-- <h6>Currencies</h6> -->
+                                    <div class="card text-white border-dark" style="background-color: #1C202B; width:100%;  max-height:100%;">
+                                        <div class="card-header border-dark">Company Details</div>
+                                        <div class="card-body">
+                                            <h4>{{cInfo.description}}</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            {% endif %} 
+        {% endif %}   
+    </div>
+
+    <!-- Market Summary -->
+    <div class="p-2 bd-highlight flex-fill">
+        <!-- <p>Market Summary</p> -->
+        <div class="card text-white" style="background-color: #0C0E15; max-width: 100%; max-height: 100%; border-color: #0c2375;">
+            <div class="card-header" style="background-color: #121620; border-color: #0c2375;">
+                <a class="card-link" data-toggle="collapse" href="#collapseMarket"><strong>Market Summary</strong></a>
+            </div>
+            <div class="collapse show" id="collapseMarket" data-parent="#accordion">
+                <div class="card-body">
+                    <div class="d-flex flex-row bd-highlight mb-2 flex-fill">
+                        <div class="p-2 bd-highlight flex-fill" style="width:50%">
+                            <!-- <h6>Indices</h6> -->
+                            <div class="card text-white border-dark" style="background-color: #1C202B; width:100%; max-height: 100%;">
+                                <div class="card-header border-dark">Indexes/Commodities</div>
+                                <div class="card-body">
+                                    <!-- TradingView Widget BEGIN -->
+                                    <div class="tradingview-widget-container">
+                                        <div class="tradingview-widget-container__widget"></div>
+                                        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async> {
+                                            "colorTheme": "dark","dateRange": "3m","showChart": true,"locale": "en",
+                                            "width": "100%","height": "500","largeChartUrl": "","isTransparent": false,"plotLineColorGrowing": "rgba(152, 0, 255, 1)",
+                                            "plotLineColorFalling": "rgba(17, 85, 204, 1)","gridLineColor": "rgba(42, 46, 57, 1)","scaleFontColor": "rgba(255, 255, 255, 1)","belowLineFillColorGrowing": "rgba(53, 28, 117, 0.12)",
+                                            "belowLineFillColorFalling": "rgba(0, 0, 255, 0.12)","symbolActiveColor": "rgba(33, 150, 243, 0.12)","tabs": 
+                                            [
+                                                {
+                                                    "title": "Indices",
+                                                    "symbols": [
+                                                        {"s": "OANDA:SPX500USD","d": "S&P 500"},
+                                                        {"s": "OANDA:NAS100USD","d": "Nasdaq 100"},
+                                                        {"s": "FOREXCOM:DJI","d": "Dow 30"},
+                                                        {"s": "INDEX:NKY","d": "Nikkei 225"},
+                                                        {"s": "INDEX:DEU30","d": "DAX Index"},
+                                                        {"s": "OANDA:UK100GBP","d": "FTSE 100"},
+                                                        {"s": "TSX:TSX","d": "TSX Composite"}
+                                                    ],
+                                                    "originalTitle": "Indices"
+                                                },
+                                                {
+                                                    "title": "Commodities",
+                                                    "symbols": [
+                                                        {"s": "COAL","d": "Coal Futures"},
+                                                        {"s": "CURRENCYCOM:GOLD","d": "Gold Futures"},
+                                                        {"s": "CURRENCYCOM:OIL_CRUDE","d": "Crude Oil"},
+                                                        {"s": "OANDA:NATGASUSD","d": "Natural Gas"},
+                                                        {"s": "OANDA:CORNUSD","d": "Corn USD"},
+                                                        {"s": "CURRENCYCOM:SILVER","d": "Silver"},
+                                                        {"s": "CURRENCYCOM:PLATINUM","d": "Platinum"},
+                                                        {"s": "CURRENCYCOM:COPPER","d": "Copper"}
+                                                    ],
+                                                    "originalTitle": "Commodities"
+                                                }
+                                            ]
+                                        }
+                                        </script>
+                                    </div>
+                                    <!-- TradingView Widget END -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-2 bd-highlight flex-fill" style="width:50%">
+                            <!-- <h6>Currencies</h6> -->
+                            <div class="card text-white border-dark" style="background-color: #1C202B; width:100%;  max-height: 100%;">
+                                <div class="card-header border-dark">Foreign Exchanges</div>
+                                <div class="card-body">
+                                    <!-- TradingView Widget BEGIN -->
+                                    <div class="tradingview-widget-container">
+                                        <div class="tradingview-widget-container__widget"></div>
+                                        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-forex-heat-map.js" async>
+                                            {"width": "100%","height": "500","currencies": ["EUR","USD","JPY","GBP","CAD","CNY","INR"],"isTransparent": false,"colorTheme": "dark","locale": "en"}
+                                        </script>
+                                    </div>
+                                    <!-- TradingView Widget END -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stocks Summary -->
+    <div class="p-2 bd-highlight flex-fill">
+        <!-- <p>Market Summary</p> -->
+        <div class="card text-white" style="background-color: #0C0E15; max-width: 100%; max-height: 100%;  border-color: #0c2375;">
+            <div class="card-header" style="background-color: #121620; border-color: #0c2375;">
+                <a class="card-link" data-toggle="collapse" href="#collapseStocks"><strong>Stocks Summary</strong></a>
+            </div>
+            <div class="collapse show" id="collapseStocks" data-parent="#accordion">
+                <div class="card-body">
+                    <div class="d-flex flex-row bd-highlight mb-2 flex-fill">
+                        <div class="p-2 bd-highlight flex-fill" style="width:50%">
+                            <!-- <h6>Indices</h6> -->
+                            <div class="card text-white border-dark" style="background-color: #1C202B; width:100%; max-height: 100%;">
+                                <div class="card-header border-dark">US Stocks</div>
+                                <div class="card-body">
+                                    <!-- TradingView Widget BEGIN -->
+                                    <div class="tradingview-widget-container">
+                                        <div class="tradingview-widget-container__widget"></div>
+                                        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-hotlists.js" async>
+                                        {"colorTheme": "dark","dateRange": "3m","exchange": "US","showChart": true,
+                                        "locale": "en","largeChartUrl": "","isTransparent": false,"width": "100%",
+                                        "height": "500","plotLineColorGrowing": "rgba(25, 118, 210, 1)","plotLineColorFalling": "rgba(25, 118, 210, 1)","gridLineColor": "rgba(42, 46, 57, 1)",
+                                        "scaleFontColor": "rgba(120, 123, 134, 1)","belowLineFillColorGrowing": "rgba(33, 150, 243, 0.12)","belowLineFillColorFalling": "rgba(33, 150, 243, 0.12)","symbolActiveColor": "rgba(33, 150, 243, 0.12)"}
+                                        </script>
+                                    </div>
+                                    <!-- TradingView Widget END -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-2 bd-highlight flex-fill" style="width:50%">
+                            <!-- <h6>Currencies</h6> -->
+                            <div class="card text-white border-dark" style="background-color: #1C202B; width:100%;  max-height:100%;">
+                                <div class="card-header border-dark">CAD Stocks</div>
+                                <div class="card-body">
+                                    <!-- TradingView Widget BEGIN -->
+                                    <div class="tradingview-widget-container">
+                                        <div class="tradingview-widget-container__widget"></div>
+                                        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-hotlists.js" async>
+                                        {"colorTheme": "dark","dateRange": "3m","exchange": "TSX","showChart": true,"locale": "en","largeChartUrl": "","isTransparent": false,"width": "100%","height": "500",
+                                        "plotLineColorGrowing": "rgba(25, 118, 210, 1)","plotLineColorFalling": "rgba(25, 118, 210, 1)","gridLineColor": "rgba(42, 46, 57, 1)","scaleFontColor": "rgba(120, 123, 134, 1)",
+                                        "belowLineFillColorGrowing": "rgba(33, 150, 243, 0.12)","belowLineFillColorFalling": "rgba(33, 150, 243, 0.12)","symbolActiveColor": "rgba(33, 150, 243, 0.12)"}
+                                        </script>
+                                    </div>
+                                    <!-- TradingView Widget END -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </br>
+
+</div>
+
 {% endblock %}
-
-
-<!-- {% for key,value in api.items %} {{key}}: {{value}} <br/> {%endfor%} -->
