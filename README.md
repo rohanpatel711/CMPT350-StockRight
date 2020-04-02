@@ -83,12 +83,22 @@ It allows users to create an account which gives them acess to a portfolio syste
      7. Open a browser(Chrome, Firefox, Safari, Edge) and type http://localhost:8000 in the address bar
 
 # Features of the Web-App: 
+
 - Profile creation
 - Browsing Trending News 
 - Details of a Stock
 - Querying the current price of some share
 - Tabular representation of current shares
 - Viewing the most trending shares on that particular day
+- Browsing Trending, Live News
+- Getting current stock quotes 
+- In-depth company financials such as valuation, price history, dividends, balance sheets, etc.
+- Live data for major Indexes and Commodities
+- Live data for major Foreign Exchanges
+- Stocks Summary including US and Canadian Stocks 
+- Ability to search ticker or company name to know their details like Stock prices, Company description, Price history Balance  sheets. Ticker and company name input validation is based on the api response which is used to display error message to user. 
+- Login/register functionality. Welcome email is sent when a new user registers. Login/Registration uses Django forms which       provides input validation as a built-in feature.
+- Add/remove stocks to portfolio
 
 
 ## Contributing
