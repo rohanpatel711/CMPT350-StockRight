@@ -26,17 +26,14 @@
         background-color: #0c2375;
         color: white;
     }
-
     ul.dropdown-menu > a:hover {
         background-color: #0c2375;
         background-image: none;
     }
-
     .no-border {
         border: 0;
         box-shadow: none;
     }
-
     a.card-link:active {
         color: #0c2375;
     }
@@ -117,22 +114,44 @@
         </script>
     </div>
 
+    <style>
+        div.card {
+            background-color: #0C0E15; 
+            max-width: 100%; 
+            max-height: 100%;  
+            border-color: #0c2375;
+        }
+        div.card-header {
+            background-color: #121620; 
+            border-color: #0c2375;
+        }
+        #cLogo {
+            width:30px;
+            height:30px;
+        }
+        #fundamentalCard {
+            background-color: #1C202B; 
+            width:100%; 
+            max-height: 100%;
+        }
+    </style>
+    
     <!-- Search Results -->
     <div class="p-2 bd-highlight flex-fill">
         {% if api %} 
             {% if api == "Invalid Ticker" %} 
             {% elif api == "Invalid Company name." %}
             {% else %}
-                <div class="card text-white" style="background-color: #0C0E15; max-width: 100%; max-height: 100%;  border-color: #0c2375;">
-                    <div class="card-header" style="background-color: #121620; border-color: #0c2375;">
-                        <img src="{{api.customLogo}}" alt="{{api.companyName}} Logo" style="width:30px;height:30px;" data-toggle="collapse" href="#collapseStocks">
+                <div class="card text-white">
+                    <div class="card-header">
+                        <img id="cLogo" src="{{api.customLogo}}" alt="{{api.companyName}} Logo" data-toggle="collapse" href="#collapseStocks">
                         <a class="card-link" data-toggle="collapse" href="#collapseCompany">&nbsp;&nbsp;<strong>{{ api.companyName }}</strong></a>
                     </div>
                     <div class="collapse show" id="collapseCompany" data-parent="#accordion">
                         <div class="card-body">
                             <div class="d-flex flex-row bd-highlight mb-4 flex-fill flex-wrap">
                                 <div class="p-2 bd-highlight flex-fill" style="width:30%">
-                                    <div class="card text-white border-dark" style="background-color: #1C202B; width:100%; max-height: 100%;">
+                                    <div id="fundamentalCard" class="card text-white border-dark">
                                         <div class="card-header border-dark">Fundamentals</div>
                                         <div class="card-body">
                                             <h1>{{api.companyName}}</h1>
@@ -149,23 +168,24 @@
                                 </div>
                                 <div class="p-2 bd-highlight flex-fill" style="width:30%">
                                     <!-- <h6>Currencies</h6> -->
-                                    <div class="card text-white border-dark" style="background-color: #1C202B; width:100%;  max-height:100%;">
+                                    <div id="fundamentalCard" class="card text-white border-dark">
                                         <div class="card-header border-dark">Company Description</div>
                                         <div class="card-body">
-                                            <h1>CEO:&nbsp;<a id="Def" href="https://en.wikipedia.org/{{cInfo.customCEO}}" target="_blank">{{cInfo.CEO}}</a></h1>
+                                            <h1>CEO:&nbsp;<a id="Def" href="https://en.wikipedia.org/wiki/{{cInfo.customCEO}}" target="_blank">{{cInfo.CEO}}</a></h1>
                                             <h2>Industry:&nbsp;{{cInfo.industry}}</h2>
                                             <h4>Sector: {{cInfo.sector}}</h4>
-                                            <h4>Exchange: {{cInfo.exchange}}</h4>
+                                            <h4>Exchange: <a id="Def" href="https://{{cInfo.exchange}}.com" target="_blank">{{cInfo.exchange}}</a></h4>
                                             <h4>Primary SIC Code: {{cInfo.primarySicCode}}</h4>
                                             <h4>No. of Employees: {{cInfo.employees}}</h4>
-                                            <h4>Website: {{cInfo.website}}</h4>
-                                            <h4>Location: {{cInfo.city}}, {{cInfo.state}}, {{cInfo.country}}</h4>
+                                            <h4>Website: <a id="Def" href="{{cInfo.website}}" target="_blank">{{cInfo.website}}</a></h4>
+                                            <h4>Phone: {{cInfo.phone}}</h4>
+                                            <h4>Headquarters: {{cInfo.city}}, {{cInfo.state}}, {{cInfo.country}}</h4>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="p-2 bd-highlight flex-fill" style="width:40%">
                                     <!-- <h6>Currencies</h6> -->
-                                    <div class="card text-white border-dark" style="background-color: #1C202B; width:100%; height:100%; padding:0%;">
+                                    <div id="fundamentalCard" class="card text-white border-dark" style="width:100%; height:100%; padding:0%;">
                                         <!-- <div class="card-header border-dark">Company Details</div> -->
                                         <div class="card-body" style="padding:0%;">
                                             <!-- TradingView Widget BEGIN -->
@@ -191,7 +211,7 @@
                                 </div>
                                 <div class="p-2 bd-highlight flex-fill" style="width:33.33%">
                                     <!-- <h6>Currencies</h6> -->
-                                    <div class="card text-white border-dark" style="background-color: #1C202B; width:100%;  max-height:100%;">
+                                    <div id="fundamentalCard" class="card text-white border-dark">
                                         <div class="card-header border-dark">Company Details</div>
                                         <div class="card-body">
                                             <h4>{{cInfo.description}}</h4>
@@ -209,8 +229,8 @@
     <!-- Market Summary -->
     <div class="p-2 bd-highlight flex-fill">
         <!-- <p>Market Summary</p> -->
-        <div class="card text-white" style="background-color: #0C0E15; max-width: 100%; max-height: 100%; border-color: #0c2375;">
-            <div class="card-header" style="background-color: #121620; border-color: #0c2375;">
+        <div class="card text-white">
+            <div class="card-header">
                 <a class="card-link" data-toggle="collapse" href="#collapseMarket"><strong>Market Summary</strong></a>
             </div>
             <div class="collapse show" id="collapseMarket" data-parent="#accordion">
@@ -218,7 +238,7 @@
                     <div class="d-flex flex-row bd-highlight mb-2 flex-fill">
                         <div class="p-2 bd-highlight flex-fill" style="width:50%">
                             <!-- <h6>Indices</h6> -->
-                            <div class="card text-white border-dark" style="background-color: #1C202B; width:100%; max-height: 100%;">
+                            <div id="fundamentalCard" class="card text-white border-dark">
                                 <div class="card-header border-dark">Indexes/Commodities</div>
                                 <div class="card-body">
                                     <!-- TradingView Widget BEGIN -->
@@ -267,7 +287,7 @@
                         </div>
                         <div class="p-2 bd-highlight flex-fill" style="width:50%">
                             <!-- <h6>Currencies</h6> -->
-                            <div class="card text-white border-dark" style="background-color: #1C202B; width:100%;  max-height: 100%;">
+                            <div id="fundamentalCard" class="card text-white border-dark">
                                 <div class="card-header border-dark">Foreign Exchanges</div>
                                 <div class="card-body">
                                     <!-- TradingView Widget BEGIN -->
@@ -290,8 +310,8 @@
     <!-- Stocks Summary -->
     <div class="p-2 bd-highlight flex-fill">
         <!-- <p>Market Summary</p> -->
-        <div class="card text-white" style="background-color: #0C0E15; max-width: 100%; max-height: 100%;  border-color: #0c2375;">
-            <div class="card-header" style="background-color: #121620; border-color: #0c2375;">
+        <div class="card text-white">
+            <div class="card-header">
                 <a class="card-link" data-toggle="collapse" href="#collapseStocks"><strong>Stocks Summary</strong></a>
             </div>
             <div class="collapse show" id="collapseStocks" data-parent="#accordion">
@@ -299,7 +319,7 @@
                     <div class="d-flex flex-row bd-highlight mb-2 flex-fill">
                         <div class="p-2 bd-highlight flex-fill" style="width:50%">
                             <!-- <h6>Indices</h6> -->
-                            <div class="card text-white border-dark" style="background-color: #1C202B; width:100%; max-height: 100%;">
+                            <div id="fundamentalCard" class="card text-white border-dark">
                                 <div class="card-header border-dark">US Stocks</div>
                                 <div class="card-body">
                                     <!-- TradingView Widget BEGIN -->
@@ -318,7 +338,7 @@
                         </div>
                         <div class="p-2 bd-highlight flex-fill" style="width:50%">
                             <!-- <h6>Currencies</h6> -->
-                            <div class="card text-white border-dark" style="background-color: #1C202B; width:100%;  max-height:100%;">
+                            <div id="fundamentalCard" class="card text-white border-dark">
                                 <div class="card-header border-dark">CAD Stocks</div>
                                 <div class="card-body">
                                     <!-- TradingView Widget BEGIN -->
