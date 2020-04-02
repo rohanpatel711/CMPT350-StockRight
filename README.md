@@ -1,8 +1,7 @@
 # CMPT350-StockRight
 
 StockRight is a website that provides live prices, historical data, news articles, etc
-
-It allows users to create an account which allows them to add stocks to thier watchlist and view additional information about the stock.
+It allows users to create an account which gives them acess to a portfolio system which allows them to add stocks to thier watchlist and monitor them.
 
 # Technologies Used
 
@@ -12,6 +11,7 @@ It allows users to create an account which allows them to add stocks to thier wa
     JQuery
     Python
     Django
+    AngularJS Expressions    
 
 # Requirements
 
@@ -20,33 +20,67 @@ It allows users to create an account which allows them to add stocks to thier wa
 
 ####      Packages Required:
 
-    virtualenv
-    flask
-    requests
-    bs4
-    django
-    post
-    pandas
-    json
     ajax
+    appdirs
+    asgiref
+    astroid
+    beautifulsoup4
+    certifi
+    crypto
+    decorator
+    distlib
+    Django
     dj-database-url
     django-jquery
     django-staticfiles
+    dj-database-url
+    django-jquery
+    django-widget-tweaks
+    djangorestframework
+    djangorestframework-simplejwt
+    filelock
+    Flask
+    Flask-SocketIO
     get
+    json
+    itsdangerous
+    Jinja2==2.10
+    lazy-object-proxy
+    lxml
+    MarkupSafe
+    pandas
+    pbr
+    PyJWT
+    pylint
+    pylint-django
+    pylint-plugin-utils
+    python-engineio
+    python-socketio
+    post
+    request
+    simplejson
+    sqlparse
+    urllib3
+    virtualenv
+    virtualenv-clone
+    virtualenvwrapper
+
     
 # API's 
     
      IEX Cloud
      Stock News API
+     Yahoo Finance API
      
 # Step's to run the project locally on your machine
 
      1. $ git clone https://github.com/rohanpatel711/CMPT350-StockRight.git
      2. $ cd CMPT350-StockRight/
      3. $ source venv/Scripts/activate
-     4. $ cd StockRight/
-     5. $ python manage.py runserver
-     6. Open a browser(Chrome, Firefox, Safari, Edge) and type http://localhost:8000 in the address bar
+     4. $ pip install -r requirements.txt
+     5. $ cd StockRight/
+     6. $ python manage.py runserver
+     7. Open a browser(Chrome, Firefox, Safari, Edge) and type http://localhost:8000 in the address bar
 
 # Features of the Web-App: 
 - Profile creation
